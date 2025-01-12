@@ -10,7 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Swagger intro')
     .setDescription('First demo in swagger')
-    .setVersion('2.0')
+    .setVersion('1.0')
     .addTag('85-dars')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
