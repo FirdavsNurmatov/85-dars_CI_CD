@@ -1,5 +1,6 @@
 services:
   super-app:
+    container_name: docker_ci_cd
     build:
       context: .
     env_file:
@@ -14,12 +15,12 @@ services:
     restart: unless-stopped
 
   mongodb:
+    container_name: docker_mongo
     image: mongo
     environment:
-      - MONGO_URI=mongodb:localhost:27018/docker
+      - MONGO_URI=mongodb://localhost:27018/docker
     volumes:
       - mongo_data:/var/lib/mongodb/data
-    container_name: mongo:test
     ports:
       - '27018:27017'
     restart: unless-stopped
