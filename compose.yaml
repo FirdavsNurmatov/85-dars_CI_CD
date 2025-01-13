@@ -1,22 +1,28 @@
 services:
   super-app:
-    build: .
-    environment:
-      - MONGO_URI=mongodb://localhost:27017/83-dars
+    build:
+      context: .
     env_file:
       - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - '5000:3000'
     depends_on:
       - mongodb
+    restart: unless-stopped
 
   mongodb:
     image: mongo
+    environment:
+      - MONGO_URI=mongodb:localhost:27018/docker
     volumes:
-      - mongo-data:/var/lib/mongodb/data
+      - mongo_data:/var/lib/mongodb/data
     container_name: mongo:test
     ports:
-      - '27017:27017'
+      - '27018:27017'
+    restart: unless-stopped
 
 volumes:
-  mongo-data:
+  mongo_data:
